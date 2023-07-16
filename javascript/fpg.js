@@ -62,7 +62,7 @@ function maxItemAssociation (input) {
     let longestSet = []
     for (let LeftSet of BranchSets) {
         for (let RightSet of BranchSets) {
-            if (LeftSet.filter(value => RightSet.includes(value))) {
+            if (LeftSet.filter(value => RightSet.includes(value)).length > 0) {
                 LeftSet = LeftSet.concat(RightSet)
             }
         }
