@@ -11,13 +11,13 @@ function promiseReduce(asyncFunctions, reduce, initialValue) {
   return new Promise ((resolve) => {
       let Accumulator = initialValue
       asyncFunctions.reduce((prevPromise, currentFunc, index) =>
-          prevPromise.then(val => {
-              if (index !== 0) {
-                Accumulator = reduce(Accumulator, val)
-              }
-              return currentFunc()
-          })
-      , Promise.resolve(initialValue)).then(val => {
+        Promise.resolve(prevPromise).then(val => {
+            if (index !== 0) {
+              Accumulator = reduce(Accumulator, val)
+            }
+            return currentFunc()
+        })
+      , initialValue).then(val => {
         resolve(reduce(Accumulator, val))
       })
   })
